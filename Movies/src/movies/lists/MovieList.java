@@ -43,14 +43,25 @@ public class MovieList {
 		*  TODO:: Iterators when iterating through lists
 		*  
 		*/ 
+		// Set to the last position in case a later release date is not found. 
+		int addPosition = comingMovies.size() - 1;
+		
 		for (int i = 0; i < comingMovies.size(); i++) {
+			// If we encounter a later release date then movie should be added in that position. 
 			if (comingMovies.get(i).getReleaseDate().after(m.getReleaseDate())) { // Change "getReleaseDate()" later
-				comingMovies.add(i, m);
+				addPosition = i;
+			}
+			// If a movie is found with the same name...
+			if (comingMovies.get(i).getName().equals(m.getName())) {
+				// Display an error message to the user.
+				System.out.println("Error: That movie already exists in the \"Coming\" movies list.");
+				// Exit the function.
 				return;
 			}
 		}
+		
 		// Add the movie to the coming movies list.
-		comingMovies.add(m);
+		comingMovies.add(addPosition, m);
 	}
 	
 	public void addToShowingList(Movie m) {

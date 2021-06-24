@@ -49,6 +49,7 @@ public class MovieList {
 				return;
 			}
 		}
+		// Add the movie to the coming movies list.
 		comingMovies.add(m);
 	}
 	
@@ -67,7 +68,7 @@ public class MovieList {
 				return;
 			}
 		}
-		System.out.println("Unsuccessful. That movie does not exist in our system.");
+		System.out.println("Error: Edit Unsuccessful.\nThat movie does not exist in our \"coming\" movies list.");
 	}
 	
 	public int countComingMovies(Date d) {
@@ -100,7 +101,7 @@ public class MovieList {
 				return;
 			}
 		}
-		System.out.println("Unsuccessful. That movie does not exist in our system.");
+		System.out.println("Error: Edit Unsuccessful.\nThat movie does not exist in our \"coming\" movies list.");
 
 	}
 	

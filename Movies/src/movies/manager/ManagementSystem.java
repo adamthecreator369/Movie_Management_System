@@ -74,7 +74,7 @@ public class ManagementSystem {
 						System.out.println("Enter the movie name: ");
 						movieName = userInput.nextLine();
 						// If user failed to enter a movie name, display this error message.
-						if (movieName.length() < 1) System.out.println("Please enter a non-empty String.");
+						if (movieName.length() < 1) System.out.println("Error: Please enter a non-empty String.");
 					}
 					// Prompt user for a release date until the user enters a valid date.
 					while (releaseDate == null) {
@@ -88,7 +88,7 @@ public class ManagementSystem {
 						// .replaceAll() accounts for user entering spaces between description genres.
 						movieDescription = userInput.nextLine().replaceAll(" ", "/");
 						// If user failed to enter a movie description, display this error message.
-						if (movieDescription.length() < 1) System.out.println("Please enter a non-empty String.");
+						if (movieDescription.length() < 1) System.out.println("Error: Please enter a non-empty String.");
 					}
 					// Prompt user for a receive date until the user enters a valid date.
 					while (receiveDate == null) {
@@ -98,7 +98,7 @@ public class ManagementSystem {
 						// Ensure receive date does not come after release date. 
 						if (receiveDate != null) {
 							if (receiveDate.after(releaseDate)) {
-								System.out.println("Receive date must be before release date.");
+								System.out.println("Error: Receive date must be before release date.");
 								receiveDate = null;
 							}
 						}
@@ -137,7 +137,7 @@ public class ManagementSystem {
 						if (editCommand.equals("description") || editCommand.equals("release date")) {
 							break;
 						} else {
-							System.out.println("Editing option entered is not valid.");
+							System.out.println("Error: Editing option entered is not valid.");
 							// Reset the following. 
 							editCommand = "";
 						}
@@ -150,7 +150,7 @@ public class ManagementSystem {
 							// .replaceAll() accounts for user entering spaces between description genres.
 							movieDescription = userInput.nextLine().replaceAll(" ", "/");
 							// If user failed to enter a movie description, display this error message.
-							if (movieDescription.length() < 1) System.out.println("Please enter a non-empty String.");
+							if (movieDescription.length() < 1) System.out.println("Error: Please enter a non-empty String.");
 						}
 						// Edit the specified movie's description.
 						movieList.editDescription(movieName, movieDescription);
@@ -181,7 +181,7 @@ public class ManagementSystem {
 						date = convertDate(userInput.nextLine().trim());
 					}
 					// Display the count to the user. 
-					System.out.printf("Count of movie's coming before the given date is %d.", movieList.countComingMovies(date));
+					System.out.printf("Count of movie's coming before the given date is %d.\n", movieList.countComingMovies(date));
 					break;
 				case ("save"): // If the user enters the command "SAVE", execute the following.
 					saveChanges();
@@ -192,7 +192,7 @@ public class ManagementSystem {
 					break;
 				default: // The user has failed to enter a valid command..
 					// Notify the user their command is invalid.
-					System.out.println(command + " is not a valid command.");
+					System.out.println("Error: "command + " is not a valid command.");
 			}
 			
 			// If user has not entered the exit command, prompt user to enter another command.
@@ -248,7 +248,7 @@ public class ManagementSystem {
 	    // Date cannot be expected format if argument length < 10.
 	    if (date.length() < 10) {
 	    	// Notify user input String entered was not in the valid/acceptable format.
-	    	System.out.println("Date entered was invalid.");
+	    	System.out.println("Error: Date entered was invalid.");
 	    	return null;
 	    }
 	        
@@ -262,7 +262,7 @@ public class ManagementSystem {
 	
 	    catch(ParseException e){
 	    	// Notify user input String entered was not in the valid/acceptable format.
-	        System.out.println("Date entered was invalid.");
+	        System.out.println("Error: Date entered was invalid.");
 	    }
 	    
 	    // Return the Date
@@ -279,7 +279,7 @@ public class ManagementSystem {
 		if (status.equals("Coming")) return MovieStatus.Coming;
 		else if (status.equals("Showing")) return MovieStatus.Showing;
 		// If input String was not valid, notify user and leave status set to null.
-		System.out.println("Invalid status entered");
+		System.out.println("Error: Invalid status entered");
 		return null;
 	}
 	

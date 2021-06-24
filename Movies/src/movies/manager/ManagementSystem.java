@@ -192,7 +192,7 @@ public class ManagementSystem {
 					break;
 				default: // The user has failed to enter a valid command..
 					// Notify the user their command is invalid.
-					System.out.println("Error: "command + " is not a valid command.");
+					System.out.println("Error: " + command + " is not a valid command.");
 			}
 			
 			// If user has not entered the exit command, prompt user to enter another command.

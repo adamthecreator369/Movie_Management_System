@@ -15,9 +15,6 @@ import movies.movie.Movie;
 
 public class ManagementSystem {
 	
-	// TODO:: use a .length() check to verify dates are of proper length before even attempting
-	//        to do a conversion. 
-	
 	public static void main (String[] args) throws IOException {
 		
 		// Open input streams.
@@ -224,7 +221,7 @@ public class ManagementSystem {
 		for (int i = 0; i <= interfaceWidth; i++) { System.out.print("="); }
 		System.out.printf("\n%" + keyHeadingSpace + "s%s\n", " ", "Command Key");
 		for (int i = 0; i <= interfaceWidth; i++) { System.out.print("-"); }
-		System.out.print("\nKey - Display the command key\n"
+		System.out.print("\nKEY - Display the command key\n"
 				+ "DISPLAY - Display all movies\n"
 				+ "ADD - Add a movie to the coming movies list\n"
 				+ "EDIT - Edit a movies release date or description\n"

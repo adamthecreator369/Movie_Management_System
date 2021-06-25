@@ -19,22 +19,18 @@ public class MovieList {
 	
 	// Class-member methods
 	public void display() {
+		System.out.println("Coming Movies: ")
+		Iterator<Movie> itComing = comingMovies.iterator();
 		for (int i = 0; i < comingMovies.size(); i++) {
-			System.out.print(comingMovies.get(i)); // Should I use iterator for this?
-			
-			/*
-			 * Dear Neha, 
-			   Yes you should be using iterators to iterate through the lists.
-			   At any point we are traversing the ArrayLists the requirements
-			   state that we should be using iterators.
-			   Also, the display method is supposed to display both the Coming
-			   and the Showing movies. I would print a heading "Showing"
-			   followed by all the movies then print heading "Coming" followed by
-			   all of the coming movies.
-			*/
-			
-			// Doesn't hurt being here but the empty quotes are not necessary here. 
-			System.out.println("");
+			System.out.print(itComing.next());
+			System.out.println();
+		}
+		System.out.println("-------------------------------------------------------------------")
+		System.out.println("Showing");
+		Iterator<Movie> itShowing = showingMovies.iterator();
+		for (int i = 0; i < comingMovies.size(); i++) {
+			System.out.print(itShowing.next());
+			System.out.println();
 		}
 	}
 	
@@ -105,18 +101,25 @@ public class MovieList {
 		System.out.println("Error: Edit Unsuccessful.\nThat movie does not exist in our \"coming\" movies list.");
 
 	}
-	
-	// Should I create editReceiveDate method?
-	
-	// No, Neha,  this is not an option for the user. Receive dates are set. 
+
 	// My only thinking about this was if we have the start showing method for a certain date
 	// How can we Make a Movie showing when receive date hasn't passed yet. Logically, that
 	// doesn't make sense. 
 	
 	
-	/*
-	*  TODO:: We still need a Start Showing method
-	*/
+	public void startShowing(Date d) {
+		for (int i = 0; i < comingMovies.size(); i++) {
+			if (comingMovies.get(i).getReleaseDate().compareTo(d) == 0) {
+				addToShowingList(comingMovies.get(i));
+				comingMovies.get(i).setStatus("RELEASED");
+				comingMovies.remove(i);
+			} 
+		}
+	}
+	
+	public String printAll() {
+		
+	}
 	
 	/*
 	 * TODO:: Create a printAll function that prints all the movies from both list to the movies.txt file

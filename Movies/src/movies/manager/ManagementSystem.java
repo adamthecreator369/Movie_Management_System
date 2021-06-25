@@ -123,6 +123,16 @@ public class ManagementSystem {
 					movieList.addToComingList(newMovie);
 					break;
 				case ("edit"): // If the user enters the command "EDIT", execute the following.
+					// Space formatting variables
+					int noticeSpace = 17;
+					int interfaceWidth = 53;
+					// Print notice to user that only "Coming" movies can be edited.
+					for (int i = 0; i <= interfaceWidth; i++) { System.out.print("-"); }
+					System.out.printf("\n%" + noticeSpace + "s"
+							+ "* Important Notice * \n Movies can only be edited if their status is \"Coming\"\n", " ");
+					for (int i = 0; i <= interfaceWidth; i++) { System.out.print("-"); }
+					System.out.println("\n");
+					// Prompt user to enter the name of the movie they wish to edit.
 					System.out.println("Enter the name of the movie to edit: ");
 					movieName = userInput.nextLine().trim();
 					// Stores new command.

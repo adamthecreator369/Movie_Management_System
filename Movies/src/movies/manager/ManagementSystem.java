@@ -182,10 +182,13 @@ public class ManagementSystem {
 					}
 					break;
 				case "start showing": // If the user enters the command "START SHOWING", execute the following.
-					/*
-					// TODO:: CODE GOES HERE
-					// Start showing function call
-				    */
+					// Prompt user for a release date until the user enters a valid date.
+					while (date == null) {
+						System.out.println("Enter the release date of the movies you would like\nto start showing (e.g. 01/22/2021): ");
+						// Convert to Date from user input String.
+						date = convertDate(userInput.nextLine().trim());
+					}
+					movieList.startShowing(date);
 					break;
 				case ("count"): // If the user enters the command "COUNT", execute the following.
 					// Prompt user to enter a Date until a valid Date is entered. 

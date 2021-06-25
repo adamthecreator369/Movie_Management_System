@@ -305,13 +305,13 @@ public class ManagementSystem {
 	 * @throws IOException
 	 */
 	static void saveChanges() throws IOException {
+		
 		// Open output streams.
 		FileOutputStream fout = new FileOutputStream("movies.txt");
 		PrintWriter writer = new PrintWriter(fout);
 		
-		/* ******  Add code here  *****
-		 * Iterate through MovieLists printing each movie to the output file.
-		 */
+		// Print the movie lists in their current state to the output file.
+		writer.write(list.toString());
 		
 		// Close open streams.
 		writer.close();

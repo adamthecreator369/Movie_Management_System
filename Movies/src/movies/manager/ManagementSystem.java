@@ -132,9 +132,13 @@ public class ManagementSystem {
 							+ "* Important Notice * \n Movies can only be edited if their status is \"Coming\"\n", " ");
 					for (int i = 0; i <= interfaceWidth; i++) { System.out.print("-"); }
 					System.out.println("\n");
-					// Prompt user to enter the name of the movie they wish to edit.
-					System.out.println("Enter the name of the movie to edit: ");
-					movieName = userInput.nextLine().trim();
+					// Prompt user to enter the name of the movie they wish to edit until they enter a non-empty String.
+					while (movieName.length() < 1) {
+						System.out.println("Enter the movie name: ");
+						movieName = userInput.nextLine();
+						// If user failed to enter a movie name, display this error message.
+						if (movieName.length() < 1) System.out.println("Error: Please enter a non-empty String.");
+					}
 					// Stores new command.
 					String editCommand = "";
 					// Prompt user to enter an editing option until a valid option is entered.

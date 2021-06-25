@@ -131,14 +131,31 @@ public class MovieList {
 		}
 	}
 	
-	public String printAll() {
+	@Override
+	public String toString() {
 		
+		// Iterator used to iterate through both movie lists.
+		Iterator<Movie> iter = comingMovies.iterator();
+		
+		// Used to build a String to print to the output file "movies.txt".
+		StringBuilder sb = new StringBuilder();
+		
+		// Until the end of the comingMovies list...
+		while (iter.hasNext()) {
+			// Append String representation of each movie followed by a new line. 
+			sb.append(iter.next().toFileString() + "\n");
+		}
+		
+		// Set the iterator to the showingMovies list.
+		iter = showingMovies.iterator();
+		
+		// Until the end of the showingMovies list...
+		while (iter.hasNext()) {
+			// Append String representation of each movie followed by a new line. 
+			sb.append(iter.next().toFileString() + "\n");
+		}
+		
+		return sb.toString();
 	}
-	
-	/*
-	 * TODO:: Create a printAll function that prints all the movies from both list to the movies.txt file
-	 * This function will be use to "SAVE" all changes made by the user by overwriting the data file 
-	 * movies.txt. 
-	 */
 
 }

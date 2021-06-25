@@ -19,16 +19,30 @@ public class MovieList {
 	
 	// Class-member methods
 	public void display() {
-		System.out.println("Coming Movies: ")
+		
+		// Print a heading 
+		System.out.println("\n==============\nComing Movies:\n==============");
+		
+		// Iterator for comingMovies list
 		Iterator<Movie> itComing = comingMovies.iterator();
-		for (int i = 0; i < comingMovies.size(); i++) {
+		
+		// Until we have reached the end of the MovieList
+		while (itComing.hasNext()) {
 			System.out.print(itComing.next());
 			System.out.println();
 		}
-		System.out.println("-------------------------------------------------------------------")
-		System.out.println("Showing");
+		
+		// Print a divider between the displayed movie lists
+		for (int i = 0; i <= 53; i++) System.out.print("-");
+		
+		// Print heading to the standard console.
+		System.out.println("\n\n===============\nShowing Movies:\n===============");
+		
+		// Iterator for showingMovies list
 		Iterator<Movie> itShowing = showingMovies.iterator();
-		for (int i = 0; i < comingMovies.size(); i++) {
+		
+		// Until we have reached the end of the showing list
+		while (itShowing.hasNext()) {
 			System.out.print(itShowing.next());
 			System.out.println();
 		}

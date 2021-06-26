@@ -127,6 +127,8 @@ public class MovieList {
 			if (currMovie.getName().equals(name)) {  // If the current movie's name is the same as the movie we're trying to change the releaseDate of
 				// That means that this is the element we are trying to change
 				if (currMovie.getReceiveDate().compareTo(d) > 0) { // If the target movie's receive date is after the release date
+					// Notify the user this action cannot be performed.
+					System.out.print("Error: Cannot change a release date to before the receive date.");
 					return; // End the method here
 				}
 				currMovie.setReleaseDate(d); // Otherwise, set the release date as the input date

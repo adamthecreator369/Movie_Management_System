@@ -83,10 +83,11 @@ public class MovieList {
 	}
 	
 	public int countComingMovies(Date d) {
-		
 		int totalMoviesBeforeDate = 0;
+		Iterator it = comingMovies.iterator();
 		for (int i = 0; i < comingMovies.size(); i++) {
-			if (comingMovies.get(i).getReleaseDate().compareTo(d) < 0) {
+			Movie currMovie = it.next();
+			if (currMovie.getReleaseDate().compareTo(d) < 0) {
 				totalMoviesBeforeDate++;
 			} 
 		}
@@ -111,10 +112,12 @@ public class MovieList {
 	}
 	
 	public void startShowing(Date d) {
+		Iterator it = comingMovies.iterator();
 		for (int i = 0; i < comingMovies.size(); i++) {
-			if (comingMovies.get(i).getReleaseDate().compareTo(d) == 0) {
-				addToShowingList(comingMovies.get(i));
-				comingMovies.get(i).setStatus("RELEASED");
+			Movie currMovie = it.next();
+			if (currMovie.getReleaseDate().compareTo(d) == 0) {
+				addToShowingList(currMovie);
+				currMovie.setStatus("RELEASED");
 				comingMovies.remove(i);
 			} 
 		}

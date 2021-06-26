@@ -53,14 +53,19 @@ public class MovieList {
 		}
 	}
 	
-	/** Adds a movie to the coming movie list */
-	public void addToComingList(Movie m) {
+	/**
+	 * Adds a movie to the coming movie list.
+	 * @param m: the movie to be added
+	 * @return: {true} if the movie was add successfully; {false} otherwise.
+	 */
+	public boolean addToComingList(Movie m) {
 		ListIterator<Movie> it = comingMovies.listIterator(); // Create iterator to iterate over the comingMovies list
 		int moviePos = -1; 
 		while (it.hasNext()) { // While there are more elements to iterate over
 			Movie currMovie = (Movie) it.next(); // Move the iterator to the next element and store the element that was passed over
 			if (currMovie.getName().equals(m.getName())) { // If the input movie already exists in the list
-				return; // Then end the method here
+				System.out.println("Error: Cannot add duplicate movies to the system.");
+				return false; // Then end the method here
 			}
 			if (currMovie.getReleaseDate().after(m.getReleaseDate()) && moviePos == -1) { // If the input movie should be inserted here because the element after it is greater than it
 				moviePos = comingMovies.indexOf(currMovie);
@@ -73,9 +78,13 @@ public class MovieList {
 			// Add the movie to the end of the coming movies list in case the movie has the latest release date
 			comingMovies.add(m);
 		}
+		return true;
 	}
 	
-	/** Adds a movie to the showing movie list */
+	/**
+	 * Adds a movie to the showing movies list.
+	 * @param m: the movie to be added.
+	 */
 	public void addToShowingList(Movie m) {
 		showingMovies.add(m); // Add the movie to the end of the showingMovies list
 	}
@@ -127,7 +136,7 @@ public class MovieList {
 			if (currMovie.getName().equals(name)) {  // If the current movie's name is the same as the movie we're trying to change the releaseDate of
 				// That means that this is the element we are trying to change
 				if (currMovie.getReceiveDate().compareTo(d) > 0) { // If the target movie's receive date is after the release date
-					// Notify the user this action cannot be performed.
+					// Notify the user that this action cannot be performed. 
 					System.out.print("Error: Cannot change a release date to before the receive date.");
 					return; // End the method here
 				}

@@ -23,6 +23,7 @@ public class ManagementSystem {
 		
 		// MovieList object used for storing Movie objects within two lists: "Coming" and "Showing"
 		MovieList movieList = new MovieList();
+		
 				
 		// Parse input file data.
 		while (scanner.hasNext()) {
@@ -97,7 +98,7 @@ public class ManagementSystem {
 						receiveDate = convertDate(userInput.nextLine().trim());
 						// Ensure receive date does not come after release date. 
 						if (receiveDate != null) {
-							if (receiveDate.after(releaseDate)) {
+							if (receiveDate.compareTo(releaseDate) >= 0) {
 								System.out.println("Error: Receive date must be before release date.");
 								receiveDate = null;
 							}
@@ -120,12 +121,9 @@ public class ManagementSystem {
 					// Create/Instantiate movie object using user entered data. 
 					Movie newMovie = new Movie(movieName, releaseDate, movieDescription, receiveDate, status);	
 					// Add the new movie to the "Coming" MovieList.
-					movieList.addToComingList(newMovie);
-					// Notification that the movie has been added.
-					System.out.println("Movie has been successfully added.");
+					if (movieList.addToComingList(newMovie)) System.out.println("Movie has been successfully added.");
 					break;
 				case ("edit"): // If the user enters the command "EDIT", execute the following.
-					// Space formatting variables
 					int noticeSpace = 17;
 					int interfaceWidth = 53;
 					// Print notice to user that only "Coming" movies can be edited.
@@ -134,10 +132,10 @@ public class ManagementSystem {
 							+ "* Important Notice * \n Movies can only be edited if their status is \"Coming\"\n", " ");
 					for (int i = 0; i <= interfaceWidth; i++) { System.out.print("-"); }
 					System.out.println("\n");
-					// Prompt user to enter the name of the movie they wish to edit until they enter a non-empty String.
+					// Prompt user for a movie name until they enter a non-empty string
 					while (movieName.length() < 1) {
 						System.out.println("Enter the movie name: ");
-						movieName = userInput.nextLine();
+						movieName = userInput.nextLine().trim();
 						// If user failed to enter a movie name, display this error message.
 						if (movieName.length() < 1) System.out.println("Error: Please enter a non-empty String.");
 					}
@@ -154,7 +152,7 @@ public class ManagementSystem {
 							break;
 						} else {
 							System.out.println("Error: Editing option entered is not valid.");
-							// Reset the following. 
+							// Reset the following and prompt user again to enter a valid option. 
 							editCommand = "";
 						}
 					}
@@ -200,10 +198,11 @@ public class ManagementSystem {
 						date = convertDate(userInput.nextLine().trim());
 					}
 					// Display the count to the user. 
-					System.out.printf("Count of movie's coming before the given date is %d.\n", movieList.countComingMovies(date));
+					System.out.printf("Count of movie's coming before the given date is %d.\n"
+							+ "", movieList.countComingMovies(date));
 					break;
 				case ("save"): // If the user enters the command "SAVE", execute the following.
-					saveChanges();
+					saveChanges(movieList);
 					break;
 				case ("exit"): // If the user enters the command "EXIT", execute the following. 
 					// Setting this to false causes the program to exit the while loop.
@@ -233,7 +232,7 @@ public class ManagementSystem {
 		int headingSpace = 16;
 		int keyHeadingSpace = 21;
 		int typeCommandSpace = 10;
-				
+		
 		// Print heading, command key, and instructions to the standard console.
 		for (int i = 0; i <= interfaceWidth; i++) { System.out.print("="); }
 		System.out.printf("\n%" + headingSpace + "s%s\n", " ", "MOVIE MANAGEMENT SYSTEM");
@@ -248,6 +247,7 @@ public class ManagementSystem {
 				+ "COUNT - Number of coming movies prior to a given date\n"
 				+ "SAVE - Save all changes\n"
 				+ "EXIT - Exit the program\n");
+		
 		for (int i = 0; i <= interfaceWidth; i++) { System.out.print("="); }
 		System.out.printf("\n%" + typeCommandSpace + "sType any above command to continue\n", " ");
 		for (int i = 0; i <= interfaceWidth; i++) { System.out.print("="); }
@@ -278,8 +278,8 @@ public class ManagementSystem {
 	        // Set result to the parsed argument String
 	        result  = dateFormat.parse(date);
 	    }
-	
 	    catch(ParseException e){
+	    	// This catch will only ever apply to user input. 
 	    	// Notify user input String entered was not in the valid/acceptable format.
 	        System.out.println("Error: Date entered was invalid.");
 	    }
@@ -306,7 +306,7 @@ public class ManagementSystem {
 	 * Saves and prints all changes made by user to the movies.txt file. 
 	 * @throws IOException
 	 */
-	static void saveChanges() throws IOException {
+	static void saveChanges(MovieList list) throws IOException {
 		
 		// Open output streams.
 		FileOutputStream fout = new FileOutputStream("movies.txt");

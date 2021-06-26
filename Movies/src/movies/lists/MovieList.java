@@ -63,7 +63,7 @@ public class MovieList {
 		int moviePos = -1; 
 		while (it.hasNext()) { // While there are more elements to iterate over
 			Movie currMovie = (Movie) it.next(); // Move the iterator to the next element and store the element that was passed over
-			if (currMovie.getName().equals(m.getName())) { // If the input movie already exists in the list
+			if (currMovie.getName().toLowerCase().equals(m.getName().toLowerCase())) { // If the input movie already exists in the list
 				System.out.println("Error: Cannot add duplicate movies to the system.");
 				return false; // Then end the method here
 			}

@@ -49,12 +49,13 @@ public class MovieList {
 	}
 	
 	public void addToComingList(Movie m) {
-		/* 
-		*  TODO:: Iterators when iterating through lists
-		*  TODO:: Keep from adding duplicate movies to the list. 
-		*/ 
+		Iterator it = comingMovies.iterator();
 		for (int i = 0; i < comingMovies.size(); i++) {
-			if (comingMovies.get(i).getReleaseDate().after(m.getReleaseDate())) { // Change "getReleaseDate()" later
+			Movie currMovie = it.next();
+			if (currMovie.getName().equals(m.getName())) {
+				return;
+			}
+			if (currMovie.getReleaseDate().after(m.getReleaseDate())) { // Change "getReleaseDate()" later
 				comingMovies.add(i, m);
 				return;
 			}
@@ -69,12 +70,11 @@ public class MovieList {
 	}
 	
 	public void editDescription(String name, String description) {
-		/*
-		*   TODO:: Must use iterators when iterating through lists.
-		*/
+		Iterator it = comingMovies.iterator();
 		for (int i = 0; i < comingMovies.size(); i++) {
-			if (comingMovies.get(i).getName().equals(name)) {
-				comingMovies.get(i).setDescription(description);
+			Movie currMovie = it.next();
+			if (currMovie.getName().equals(name)) {
+				currMovie.setDescription(description);
 				System.out.println("Edit was successful.");
 				return;
 			}
@@ -85,13 +85,7 @@ public class MovieList {
 	public int countComingMovies(Date d) {
 		
 		int totalMoviesBeforeDate = 0;
-		/*
-		*	Since the List is supposed to be Ordered by release date then
-		*   binary would be faster.
-		* 	
-		*   
-		*/
-		for (int i = 0; i < comingMovies.size(); i++) { // Should I use binary or linear search?
+		for (int i = 0; i < comingMovies.size(); i++) {
 			if (comingMovies.get(i).getReleaseDate().compareTo(d) < 0) {
 				totalMoviesBeforeDate++;
 			} 
@@ -100,14 +94,14 @@ public class MovieList {
 	}
 	
 	public void editReleaseDate(String name, Date d) {
-	
-		/*
-		*  TODO:: Iterators when iterating through lists.
-		*  TODO:: Don't allow changing release date to a date prior to receive date
-		*/ 
+		Iterator it = comingMovies.iterator();
 		for (int i = 0; i < comingMovies.size(); i++) {
-			if (comingMovies.get(i).getName().equals(name)) {
-				comingMovies.get(i).setReleaseDate(d);
+			Movie currMovie = it.next();
+			if (currMovie.getName().equals(name)) {
+				if (currMovie.getReceiveDate.compareTo(d) > 0) {
+					return;
+				}
+				currMovie.setReleaseDate(d);
 				System.out.println("Edit was successful.");
 				return;
 			}
@@ -115,11 +109,6 @@ public class MovieList {
 		System.out.println("Error: Edit Unsuccessful.\nThat movie does not exist in our \"coming\" movies list.");
 
 	}
-
-	// My only thinking about this was if we have the start showing method for a certain date
-	// How can we Make a Movie showing when receive date hasn't passed yet. Logically, that
-	// doesn't make sense. 
-	
 	
 	public void startShowing(Date d) {
 		for (int i = 0; i < comingMovies.size(); i++) {

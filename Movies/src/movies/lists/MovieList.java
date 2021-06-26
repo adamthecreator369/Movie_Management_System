@@ -65,8 +65,7 @@ public class MovieList {
 		comingMovies.add(m);
 	}
 	
-	// Shouldn't this method be private because the user will never have to add any movies to the showing list, the program will do that instead
-	public void addToShowingList(Movie m) { // Change to private?
+	public void addToShowingList(Movie m) {
 		showingMovies.add(m); // Add the movie to the end of the showingMovies list
 	}
 	

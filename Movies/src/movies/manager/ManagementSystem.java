@@ -121,6 +121,8 @@ public class ManagementSystem {
 					Movie newMovie = new Movie(movieName, releaseDate, movieDescription, receiveDate, status);	
 					// Add the new movie to the "Coming" MovieList.
 					movieList.addToComingList(newMovie);
+					// Notification that the movie has been added.
+					System.out.println("Movie has been successfully added.");
 					break;
 				case ("edit"): // If the user enters the command "EDIT", execute the following.
 					// Space formatting variables
@@ -312,6 +314,9 @@ public class ManagementSystem {
 		
 		// Print the movie lists in their current state to the output file.
 		writer.write(list.toString());
+		
+		// Notify the user the save has completed.
+		System.out.println("Save completed successfully.");
 		
 		// Close open streams.
 		writer.close();

@@ -49,33 +49,34 @@ public class MovieList {
 	}
 	
 	public void addToComingList(Movie m) {
-		Iterator it = comingMovies.iterator();
-		for (int i = 0; i < comingMovies.size(); i++) {
-			Movie currMovie = it.next();
-			if (currMovie.getName().equals(m.getName())) {
-				return;
+		Iterator it = comingMovies.iterator(); // Create iterator to iterate over the comingMovies list
+		for (int i = 0; i < comingMovies.size(); i++) { // For each Movie in the comingMovies list
+			Movie currMovie = it.next(); // Move the iterator to the next element and store the element that was passed over
+			if (currMovie.getName().equals(m.getName())) { // If the input movie already exists in the list
+				return; // Then end the method here
 			}
-			if (currMovie.getReleaseDate().after(m.getReleaseDate())) { // Change "getReleaseDate()" later
-				comingMovies.add(i, m);
-				return;
+			if (currMovie.getReleaseDate().after(m.getReleaseDate())) { // If the input movie should be inserted here because the element after it is greater than it
+				comingMovies.add(i, m); // Add this movie to the list
+				return; // Then end the method here so that we don't iterate over any more elements
 			}
 		}
 		
-		// Add the movie to the coming movies list.
+		// Add the movie to the end of the coming movies list in case the movie has the latest release date
 		comingMovies.add(m);
 	}
 	
-	public void addToShowingList(Movie m) {
-		showingMovies.add(m);
+	// Shouldn't this method be private because the user will never have to add any movies to the showing list, the program will do that instead
+	public void addToShowingList(Movie m) { // Change to private?
+		showingMovies.add(m); // Add the movie to the end of the showingMovies list
 	}
 	
 	public void editDescription(String name, String description) {
-		Iterator it = comingMovies.iterator();
-		for (int i = 0; i < comingMovies.size(); i++) {
-			Movie currMovie = it.next();
-			if (currMovie.getName().equals(name)) {
-				currMovie.setDescription(description);
-				System.out.println("Edit was successful.");
+		Iterator it = comingMovies.iterator(); // Create iterator to iterate over the comingMovies list
+		for (int i = 0; i < comingMovies.size(); i++) { // For each Movie in the comingMovies list
+			Movie currMovie = it.next(); // Move the iterator to the next element and store the element that was passed over
+			if (currMovie.getName().equals(name)) { // If the current movie's name is the same as the movie we're trying to change the description of
+				currMovie.setDescription(description); // Change the description
+				System.out.println("Edit was successful."); 
 				return;
 			}
 		}
@@ -83,26 +84,27 @@ public class MovieList {
 	}
 	
 	public int countComingMovies(Date d) {
-		int totalMoviesBeforeDate = 0;
-		Iterator it = comingMovies.iterator();
-		for (int i = 0; i < comingMovies.size(); i++) {
-			Movie currMovie = it.next();
-			if (currMovie.getReleaseDate().compareTo(d) < 0) {
-				totalMoviesBeforeDate++;
+		int totalMoviesBeforeDate = 0; // This will store the number of movies before the input date
+		Iterator it = comingMovies.iterator(); // Create iterator to iterate over the comingMovies list
+		for (int i = 0; i < comingMovies.size(); i++) { // For each Movie in the comingMovies list
+			Movie currMovie = it.next(); // Move the iterator to the next element and store the element that was passed over
+			if (currMovie.getReleaseDate().compareTo(d) < 0) { // If the current movie's release date is before the input date
+				totalMoviesBeforeDate++; // Then add one to the count of the total number of movies before the input date
 			} 
 		}
 		return totalMoviesBeforeDate;
 	}
 	
 	public void editReleaseDate(String name, Date d) {
-		Iterator it = comingMovies.iterator();
-		for (int i = 0; i < comingMovies.size(); i++) {
-			Movie currMovie = it.next();
-			if (currMovie.getName().equals(name)) {
-				if (currMovie.getReceiveDate.compareTo(d) > 0) {
-					return;
+		Iterator it = comingMovies.iterator(); // Create iterator to iterate over the comingMovies list
+		for (int i = 0; i < comingMovies.size(); i++) { // For each Movie in the comingMovies list
+			Movie currMovie = it.next(); // Move the iterator to the next element and store the element that was passed over
+			if (currMovie.getName().equals(name)) {  // If the current movie's name is the same as the movie we're trying to change the releaseDate of
+				// That means that this is the element we are trying to change
+				if (currMovie.getReceiveDate.compareTo(d) > 0) { // If the target movie's receive date is after the release date
+					return; // End the method here
 				}
-				currMovie.setReleaseDate(d);
+				currMovie.setReleaseDate(d); // Otherwise, set the release date as the input date
 				System.out.println("Edit was successful.");
 				return;
 			}
@@ -112,13 +114,13 @@ public class MovieList {
 	}
 	
 	public void startShowing(Date d) {
-		Iterator it = comingMovies.iterator();
-		for (int i = 0; i < comingMovies.size(); i++) {
-			Movie currMovie = it.next();
-			if (currMovie.getReleaseDate().compareTo(d) == 0) {
-				addToShowingList(currMovie);
-				currMovie.setStatus("RELEASED");
-				comingMovies.remove(i);
+		Iterator it = comingMovies.iterator(); // Create iterator to iterate over the comingMovies list
+		for (int i = 0; i < comingMovies.size(); i++) { // For each Movie in the comingMovies list
+			Movie currMovie = it.next(); // Move the iterator to the next element and store the element that was passed over
+			if (currMovie.getReleaseDate().compareTo(d) == 0) { // If the current movie has the same target release date
+				addToShowingList(currMovie); // Add this movie to the showingMovies list
+				currMovie.setStatus("RELEASED"); // Change the status from received to released
+				comingMovies.remove(i); // Now remove this movie from the comingMovies list because it's been transferred to the showingMovies list
 			} 
 		}
 	}

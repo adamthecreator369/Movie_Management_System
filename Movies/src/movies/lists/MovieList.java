@@ -98,7 +98,7 @@ public class MovieList {
 		Iterator<Movie> it = comingMovies.iterator(); // Create iterator to iterate over the comingMovies list
 		while (it.hasNext()) { // While there are more elements to iterate over
 			Movie currMovie = (Movie) it.next(); // Move the iterator to the next element and store the element that was passed over
-			if (currMovie.getName().equals(name)) { // If the current movie's name is the same as the movie we're trying to change the description of
+			if (currMovie.getName().toLowerCase().equals(name.toLowerCase())) { // If the current movie's name is the same as the movie we're trying to change the description of
 				currMovie.setDescription(description); // Change the description
 				System.out.println("Edit was successful."); 
 				return;
@@ -133,7 +133,7 @@ public class MovieList {
 		Iterator<Movie> it = comingMovies.iterator(); // Create iterator to iterate over the comingMovies list
 		while (it.hasNext()) { // While there are more elements to iterate over
 			Movie currMovie = it.next(); // Move the iterator to the next element and store the element that was passed over
-			if (currMovie.getName().equals(name)) {  // If the current movie's name is the same as the movie we're trying to change the releaseDate of
+			if (currMovie.getName().toLowerCase().equals(name.toLowerCase())) {  // If the current movie's name is the same as the movie we're trying to change the releaseDate of
 				// That means that this is the element we are trying to change
 				if (currMovie.getReceiveDate().compareTo(d) > 0) { // If the target movie's receive date is after the release date
 					// Notify the user that this action cannot be performed. 

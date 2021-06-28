@@ -167,7 +167,7 @@ public class ManagementSystem {
 							break;
 						}
 						// Convert status plus ensure capitalization of only the first letter of input String to avoid unnecessary errors.
-						status = convertStatus(input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase());
+						status = convertStatus(input.toLowerCase());
 					}
 					// User has canceled?
 					if (isCanceled) { 

@@ -2,10 +2,6 @@ package movies.lists;
 
 import java.util.ArrayList;
 import java.util.Date;
-package movies.lists;
-
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.ListIterator;
 
@@ -15,29 +11,29 @@ import movies.movie.MovieStatus;
 public class MovieList {
 	
 	// Data fields
-	ArrayList<Movie> showingMovies;
-	ArrayList<Movie> comingMovies;
+	ArrayList<Movie> releasedMovies;
+	ArrayList<Movie> receivedMovies;
 	
 	// Constructor
 	public MovieList() {
-		showingMovies = new ArrayList<>();
-		comingMovies = new ArrayList<>();
+		releasedMovies = new ArrayList<>();
+		receivedMovies = new ArrayList<>();
 	}
 	
 	// Class-member methods
 	
-	/** Displays all of the movies from both movie lists by status "Coming" or "Showing" */
+	/** Displays all of the movies from both movie lists by status "Received" or "Released" */
 	public void display() {
 		
 		// Print a heading 
-		System.out.println("\n==============\nComing Movies:\n==============");
+		System.out.println("\n================\nReceived Movies:\n================");
 		
-		// Iterator for comingMovies list
-		Iterator<Movie> itComing = comingMovies.iterator();
+		// Iterator for receivedMovies list
+		Iterator<Movie> itReceived = receivedMovies.iterator();
 		
-		// Until we have reached the end of the MovieList
-		while (itComing.hasNext()) {
-			System.out.print(itComing.next());
+		// Until we have reached the end of the received list.
+		while (itReceived.hasNext()) {
+			System.out.print(itReceived.next());
 			System.out.println();
 		}
 		
@@ -45,14 +41,14 @@ public class MovieList {
 		for (int i = 0; i <= 53; i++) System.out.print("-");
 		
 		// Print heading to the standard console.
-		System.out.println("\n\n===============\nShowing Movies:\n===============");
+		System.out.println("\n\n================\nReleased Movies:\n================");
 		
-		// Iterator for showingMovies list
-		Iterator<Movie> itShowing = showingMovies.iterator();
+		// Iterator for releasedMovies list
+		Iterator<Movie> itReleased = releasedMovies.iterator();
 		
-		// Until we have reached the end of the showing list
-		while (itShowing.hasNext()) {
-			System.out.print(itShowing.next());
+		// Until we have reached the end of the released list.
+		while (itReleased.hasNext()) {
+			System.out.print(itReleased.next());
 			System.out.println();
 		}
 	}
@@ -62,8 +58,8 @@ public class MovieList {
 	 * @param m: the movie to be added
 	 * @return: {true} if the movie was add successfully; {false} otherwise.
 	 */
-	public boolean addToComingList(Movie m) {
-		ListIterator<Movie> it = comingMovies.listIterator(); // Create iterator to iterate over the comingMovies list
+	public boolean addToReceivedList(Movie m) {
+		ListIterator<Movie> it = receivedMovies.listIterator(); // Create iterator to iterate over the comingMovies list
 		int moviePos = -1; 
 		while (it.hasNext()) { // While there are more elements to iterate over
 			Movie currMovie = (Movie) it.next(); // Move the iterator to the next element and store the element that was passed over
@@ -72,25 +68,25 @@ public class MovieList {
 				return false; // Then end the method here
 			}
 			if (currMovie.getReleaseDate().after(m.getReleaseDate()) && moviePos == -1) { // If the input movie should be inserted here because the element after it is greater than it
-				moviePos = comingMovies.indexOf(currMovie);
+				moviePos = receivedMovies.indexOf(currMovie);
 			}
 		}
 		// If an greater element was found place movie before that element.
 		if (moviePos != -1) {
-			comingMovies.add(moviePos, m);
+			receivedMovies.add(moviePos, m);
 		} else { // Otherwise,
-			// Add the movie to the end of the coming movies list in case the movie has the latest release date
-			comingMovies.add(m);
+			// Add the movie to the end of the received movies list in case the movie has the latest release date
+			receivedMovies.add(m);
 		}
 		return true;
 	}
 	
 	/**
-	 * Adds a movie to the showing movies list.
+	 * Adds a movie to the released movies list.
 	 * @param m: the movie to be added.
 	 */
-	public void addToShowingList(Movie m) {
-		showingMovies.add(m); // Add the movie to the end of the showingMovies list
+	public void addToReleasedList(Movie m) {
+		releasedMovies.add(m); // Add the movie to the end of the releasedMovies list
 	}
 	
 	/**
@@ -99,7 +95,7 @@ public class MovieList {
 	 * @param description: The new description.
 	 */
 	public void editDescription(String name, String description) {
-		Iterator<Movie> it = comingMovies.iterator(); // Create iterator to iterate over the comingMovies list
+		Iterator<Movie> it = receivedMovies.iterator(); // Create iterator to iterate over the receivedMovies list
 		while (it.hasNext()) { // While there are more elements to iterate over
 			Movie currMovie = (Movie) it.next(); // Move the iterator to the next element and store the element that was passed over
 			if (currMovie.getName().toLowerCase().equals(name.toLowerCase())) { // If the current movie's name is the same as the movie we're trying to change the description of
@@ -108,17 +104,17 @@ public class MovieList {
 				return;
 			}
 		}
-		System.out.println("Error: Edit Unsuccessful.\nThat movie does not exist in our \"coming\" movies list.");
+		System.out.println("Error: Edit Unsuccessful.\nThat movie does not exist in our \"received\" movies list.");
 	}
 	
 	/**
-	 * Counts and returns the number of coming movies before a given date.
+	 * Counts and returns the number of received movies before a given date.
 	 * @param d: the date to count up to.
-	 * @return: the number of coming movies before the date.
+	 * @return: the number of received movies before the date.
 	 */
-	public int countComingMovies(Date d) {
+	public int countReceivedMovies(Date d) {
 		int totalMoviesBeforeDate = 0; // This will store the number of movies before the input date
-		Iterator<Movie> it = comingMovies.iterator(); // Create iterator to iterate over the comingMovies list
+		Iterator<Movie> it = receivedMovies.iterator(); // Create iterator to iterate over the receivedMovies list
 		while (it.hasNext()) { // While there are more elements to iterate over
 			Movie currMovie = it.next(); // Move the iterator to the next element and store the element that was passed over
 			if (currMovie.getReleaseDate().compareTo(d) < 0) { // If the current movie's release date is before the input date
@@ -134,7 +130,7 @@ public class MovieList {
 	 * @param d: The date to be changed to.
 	 */
 	public void editReleaseDate(String name, Date d) {
-		Iterator<Movie> it = comingMovies.iterator(); // Create iterator to iterate over the comingMovies list
+		Iterator<Movie> it = receivedMovies.iterator(); // Create iterator to iterate over the comingMovies list
 		while (it.hasNext()) { // While there are more elements to iterate over
 			Movie currMovie = it.next(); // Move the iterator to the next element and store the element that was passed over
 			if (currMovie.getName().toLowerCase().equals(name.toLowerCase())) {  // If the current movie's name is the same as the movie we're trying to change the releaseDate of
@@ -149,33 +145,33 @@ public class MovieList {
 				return;
 			}
 		}
-		System.out.println("Error: Edit Unsuccessful.\nThat movie does not exist in our \"coming\" movies list.");
+		System.out.println("Error: Edit Unsuccessful.\nThat movie does not exist in our \"received\" movies list.");
 
 	}
 	
 	/**
-	 * Changes all movies on a specific date to Showing, removing them from the coming list and adding them to the showing list.
+	 * Starts showing movies by changing all movies on a specific date to RELEASED, removing them from the received list and adding them to the released list.
 	 * @param d: the date of the movie's to start showing. 
 	 */
 	public void startShowing(Date d) {
-		Iterator<Movie> it = comingMovies.iterator(); // Create iterator to iterate over the comingMovies list
+		Iterator<Movie> it = receivedMovies.iterator(); // Create iterator to iterate over the receivedMovies list
 		ArrayList<Integer> removePos = new ArrayList<>();
 		while (it.hasNext()) { // While there are more elements to iterate over
 			Movie currMovie = it.next(); // Move the iterator to the next element and store the element that was passed over
 			if (currMovie.getReleaseDate().compareTo(d) == 0) { // If the current movie has the same target release date
-				addToShowingList(currMovie); // Add this movie to the showingMovies list
-				currMovie.setStatus(MovieStatus.Showing); // Change the status from received to released
+				addToReleasedList(currMovie); // Add this movie to the releasedMovies list
+				currMovie.setStatus(MovieStatus.RELEASED); // Change the status from received to released
 				// Add the index position of the movie with the matching date to be changed to the list. 
-				removePos.add(comingMovies.indexOf(currMovie));
+				removePos.add(receivedMovies.indexOf(currMovie));
 			} 
 		}
 		// Remove all elements to be transfered from the list if any exist. Otherwise notify user that they do not exist. 
-		if (removePos.size() == 0) { System.out.println("No movies with that release date  the status \"Coming\"."); }
+		if (removePos.size() == 0) { System.out.println("No movies with that release date  the status \"Received\"."); }
 		while (removePos.size() != 0)  { 
 			// Notify the user which movie's have been changed. 
-			System.out.println(comingMovies.get(removePos.get(0)).getName() + " started showing successfully.");	
-			// Now remove this movie from the comingMovies list because it's been transferred to the showingMovies list
-			comingMovies.remove(comingMovies.get(removePos.get(0))); 
+			System.out.println(receivedMovies.get(removePos.get(0)).getName() + " started showing successfully.");	
+			// Now remove this movie from the receivedMovies list because it's been transferred to the releasedMovies list
+			receivedMovies.remove(receivedMovies.get(removePos.get(0))); 
 			// Now remove the current index position from the list of positions to be removed. 
 			removePos.remove(0);
 		} 
@@ -186,21 +182,21 @@ public class MovieList {
 	public String toString() {
 		
 		// Iterator used to iterate through both movie lists.
-		Iterator<Movie> iter = comingMovies.iterator();
+		Iterator<Movie> iter = receivedMovies.iterator();
 		
 		// Used to build a String to print to the output file "movies.txt".
 		StringBuilder sb = new StringBuilder();
 		
-		// Until the end of the comingMovies list...
+		// Until the end of the receivedMovies list...
 		while (iter.hasNext()) {
 			// Append String representation of each movie followed by a new line. 
 			sb.append(iter.next().toFileString() + "\n");
 		}
 		
-		// Set the iterator to the showingMovies list.
-		iter = showingMovies.iterator();
+		// Set the iterator to the releasedMovies list.
+		iter = releasedMovies.iterator();
 		
-		// Until the end of the showingMovies list...
+		// Until the end of the releasedMovies list...
 		while (iter.hasNext()) {
 			// Append String representation of each movie followed by a new line. 
 			sb.append(iter.next().toFileString() + "\n");

@@ -30,7 +30,7 @@ public class ManagementSystem {
 			// Read in next line from file and place in a String array.
 			String[] data = scanner.nextLine().split(", ");
 			// Instantiate a Movie object using data retrieved from input file. 
-			Movie movie = new Movie(data[0], convertDate(data[1]), data[2], convertDate(data[3]), convertStatus(data[4]));
+			Movie movie = new Movie(data[0], convertDate(data[1]), data[2], convertDate(data[3]), convertStatus(data[4].toLowerCase()));
 			// If currently "Released" add the Movie to the released MovieList.
 			if (movie.getStatus() == MovieStatus.RELEASED) movieList.addToReleasedList(movie);
 			// If currently "Received" then add the Movie to the received MovieList.
@@ -426,8 +426,8 @@ public class ManagementSystem {
 	 */
 	static MovieStatus convertStatus(String status) {
 		// Set status depending on argument String, if valid
-		if (status.equals("Received")) return MovieStatus.RECEIVED;
-		else if (status.equals("Released")) return MovieStatus.RELEASED;
+		if (status.equals("received")) return MovieStatus.RECEIVED;
+		else if (status.equals("released")) return MovieStatus.RELEASED;
 		// If input String was not valid, notify user and leave status set to null.
 		System.out.println("Error: Invalid status entered");
 		return null;

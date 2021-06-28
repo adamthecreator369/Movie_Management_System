@@ -44,7 +44,7 @@ public class Movie implements ComparableType<Movie> {
 	// Member methods
 	
 	/**
-	 * Checks and updates the MovieStatus to showing if the Movie's release date is today's date or before.
+	 * Checks and updates the MovieStatus to RELEASED if the Movie's release date is today's date or before.
 	 */
 	public void updateMovieStatus() {
 		
@@ -59,32 +59,12 @@ public class Movie implements ComparableType<Movie> {
 		// Create a date object using the above.
 		Date today = c.getTime();
 		
-		// If the movie's release date is today or before set MovieStatus to Showing.
-		if (getReleaseDate().compareTo(today) <= 0) this.status = MovieStatus.Showing;
+		// If the movie's release date is today or before set MovieStatus to RELEASED.
+		if (getReleaseDate().compareTo(today) <= 0) this.status = MovieStatus.RELEASED;
 	}
-	
-	/**
-	 * Checks if current movie's release date is before another movie's release date.
-	 * @param other: The other movie being checked.
-	 * @returns: {true} if release date is before {false} otherwise.
-	 */
-	public boolean releasedBefore(Movie other) { return getReleaseDate().before(other.getReleaseDate()); }
-	
-	/**
-	 * Checks if current movie's release date is after another movie's release date.
-	 * @param other: The other movie being checked.
-	 * @returns: {true} if release date is after {false} otherwise. 
-	 */
-	public boolean releasedAfter(Movie other) { return getReleaseDate().after(other.getReleaseDate()); }
 	
 	@Override
 	public int compareTo(Movie other) { return getReleaseDate().compareTo(other.getReleaseDate()); } 
-	
-	/**
-	 * Checks if the movie status is currently set to Showing.
-	 * @returns: {true} if movie is Showing {false} otherwise. 
-	 */
-	public boolean isShowing() { return getStatus() == MovieStatus.Showing; }
 	
 	/**
 	 * Formats then returns the Date in desired String format.

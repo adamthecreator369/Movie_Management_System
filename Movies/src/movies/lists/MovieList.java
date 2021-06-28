@@ -2,6 +2,10 @@ package movies.lists;
 
 import java.util.ArrayList;
 import java.util.Date;
+package movies.lists;
+
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.ListIterator;
 
@@ -155,14 +159,27 @@ public class MovieList {
 	 */
 	public void startShowing(Date d) {
 		Iterator<Movie> it = comingMovies.iterator(); // Create iterator to iterate over the comingMovies list
+		ArrayList<Integer> removePos = new ArrayList<>();
 		while (it.hasNext()) { // While there are more elements to iterate over
 			Movie currMovie = it.next(); // Move the iterator to the next element and store the element that was passed over
 			if (currMovie.getReleaseDate().compareTo(d) == 0) { // If the current movie has the same target release date
 				addToShowingList(currMovie); // Add this movie to the showingMovies list
 				currMovie.setStatus(MovieStatus.Showing); // Change the status from received to released
-				comingMovies.remove(currMovie); // Now remove this movie from the comingMovies list because it's been transferred to the showingMovies list
+				// Add the index position of the movie with the matching date to be changed to the list. 
+				removePos.add(comingMovies.indexOf(currMovie));
 			} 
 		}
+		// Remove all elements to be transfered from the list if any exist. Otherwise notify user that they do not exist. 
+		if (removePos.size() == 0) { System.out.println("No movies with that release date  the status \"Coming\"."); }
+		while (removePos.size() != 0)  { 
+			// Notify the user which movie's have been changed. 
+			System.out.println(comingMovies.get(removePos.get(0)).getName() + " started showing successfully.");	
+			// Now remove this movie from the comingMovies list because it's been transferred to the showingMovies list
+			comingMovies.remove(comingMovies.get(removePos.get(0))); 
+			// Now remove the current index position from the list of positions to be removed. 
+			removePos.remove(0);
+		} 
+		
 	}
 	
 	@Override

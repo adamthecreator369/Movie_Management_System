@@ -267,7 +267,7 @@ public class SystemManager {
 					if (editCommand.equals("release date")) {
 						// Prompt user for a release date until the user enters a valid date.
 						while (releaseDate == null) {
-							System.out.println("Enter the movie's release date (e.g. 01/22/21): ");
+							System.out.println("Enter the movie's release date (e.g. 01/22/2021): ");
 							input = userInput.nextLine().trim();
 							// Check to see if the user has canceled.
 							if (input.toLowerCase().equals("cancel")) {

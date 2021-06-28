@@ -371,11 +371,11 @@ public class ManagementSystem {
 		System.out.print("\nKEY - Display the command key\n"
 				+ "DISPLAY - Display all movies\n"
 				+ "ADD - Add a movie to the coming movies list\n"
-				+ "EDIT - Edit a movies release date or description\n"
+				+ "EDIT - Edit a movie's release date or description\n"
 				+ "START SHOWING - Start showing movies on a given date\n"
 				+ "COUNT - Number of received movies prior to a given date\n"
 				+ "CANCEL - Cancels the current operation\n"
-				+ "SAVE - Save all changes\n"
+				+ "SAVE - Saves all changes\n"
 				+ "EXIT - Exit the program\n");
 		
 		for (int i = 0; i <= interfaceWidth; i++) { System.out.print("="); }

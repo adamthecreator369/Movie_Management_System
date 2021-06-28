@@ -21,7 +21,7 @@ public class ManagementSystem {
 		FileInputStream fin = new FileInputStream("movies.txt");
 		Scanner scanner = new Scanner(fin);
 		
-		// MovieList object used for storing Movie objects within two lists: "Coming" and "Showing"
+		// MovieList object used for storing Movie objects within two lists: "Received" and "Released"
 		MovieList movieList = new MovieList();
 		
 				
@@ -29,12 +29,12 @@ public class ManagementSystem {
 		while (scanner.hasNext()) {
 			// Read in next line from file and place in a String array.
 			String[] data = scanner.nextLine().split(", ");
-			// Instantiate Movie object using data retrieved from input file. 
+			// Instantiate a Movie object using data retrieved from input file. 
 			Movie movie = new Movie(data[0], convertDate(data[1]), data[2], convertDate(data[3]), convertStatus(data[4]));
-			// If currently "Showing" add the Movie to the Showing MovieList.
-			if (movie.getStatus() == MovieStatus.Showing) movieList.addToShowingList(movie);
-			// If currently "Coming" then add the Movie to the Coming MovieList.
-			else movieList.addToComingList(movie);
+			// If currently "Released" add the Movie to the released MovieList.
+			if (movie.getStatus() == MovieStatus.RELEASED) movieList.addToReleasedList(movie);
+			// If currently "Received" then add the Movie to the received MovieList.
+			else movieList.addToReceivedList(movie);
 		}
 		
 		// Close open streams
@@ -86,7 +86,10 @@ public class ManagementSystem {
 					}
 				
 					// Adding a movie has been canceled.
-					if (isCanceled) { break; }
+					if (isCanceled) { 
+						System.out.println("Adding movie has been canceled.");
+						break; 
+					}
 					
 					// Prompt user for a release date until the user enters a valid date.
 					while (releaseDate == null) {
@@ -104,7 +107,10 @@ public class ManagementSystem {
 						}
 					}
 					// Adding a movie has been canceled?
-					if (isCanceled) { break; }
+					if (isCanceled) { 
+						System.out.println("Adding movie has been canceled.");
+						break; 
+					}
 					// Prompt the user to enter a movie description until a non-empty string is entered.
 					while (movieDescription.length() < 1) {
 						System.out.println("Enter the movie's description (e.g. Sci-Fi/Adventure): ");
@@ -119,7 +125,10 @@ public class ManagementSystem {
 						if (movieDescription.length() < 1) System.out.println("Error: Please enter a non-empty String.");
 					}
 					// Adding a movie has been canceled.
-					if (isCanceled) { break; }
+					if (isCanceled) { 
+						System.out.println("Adding movie has been canceled.");
+						break; 
+					}
 					// Prompt user for a receive date until the user enters a valid date.
 					while (receiveDate == null) {
 						System.out.println("Enter the movie's receive date (e.g. 01/22/2021): ");
@@ -143,10 +152,13 @@ public class ManagementSystem {
 						}
 					}
 					// Adding a movie has been canceled?
-					if (isCanceled) { break; }
+					if (isCanceled) { 
+						System.out.println("Adding movie has been canceled.");
+						break; 
+					}
 					// Prompt user to enter the movie status until a valid status is entered.
 					while (status == null) {
-						System.out.println("Enter the movie's status (e.g. \"Coming\" or \"Showing\"): ");
+						System.out.println("Enter the movie's status (e.g. \"Received\" or \"Released\"): ");
 						// Retrieve user input
 						input = userInput.nextLine().trim();
 						// Check to see if the user has canceled.
@@ -158,25 +170,28 @@ public class ManagementSystem {
 						status = convertStatus(input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase());
 					}
 					// User has canceled?
-					if (isCanceled) { break; }
-					// Only allow adding movies to the "Coming" MovieList
-					if (status == MovieStatus.Showing) {
-						System.out.println("Error: Cannot add a new movie to the \"Showing\" list.");
+					if (isCanceled) { 
+						System.out.println("Adding movie has been canceled.");
+						break; 
+					}
+					// Only allow adding movies to the "Received" MovieList
+					if (status == MovieStatus.RELEASED) {
+						System.out.println("Error: Cannot add a new movie to the \"Released\" list.");
 						// Leave "add" a new movie which will prompt user for a new command. 
 						break;
 					}
 					// Create/Instantiate movie object using user entered data. 
 					Movie newMovie = new Movie(movieName, releaseDate, movieDescription, receiveDate, status);	
-					// Add the new movie to the "Coming" MovieList.
-					if (movieList.addToComingList(newMovie)) System.out.println("Movie has been successfully added.");
+					// Add the new movie to the "Received" MovieList.
+					if (movieList.addToReceivedList(newMovie)) System.out.println("Movie has been successfully added.");
 					break;
 				case ("edit"): // If the user enters the command "EDIT", execute the following.
 					int noticeSpace = 17;
 					int interfaceWidth = 53;
-					// Print notice to user that only "Coming" movies can be edited.
+					// Print notice to user that only "Received" movies can be edited.
 					for (int i = 0; i <= interfaceWidth; i++) { System.out.print("-"); }
 					System.out.printf("\n%" + noticeSpace + "s"
-							+ "* Important Notice * \n Movies can only be edited if their status is \"Coming\"\n", " ");
+							+ "* Important Notice * \nA movie can only be edited if its status is \"Received\"\n", " ");
 					for (int i = 0; i <= interfaceWidth; i++) { System.out.print("-"); }
 					System.out.println("\n");
 					// Prompt user for a movie name until they enter a non-empty string
@@ -192,7 +207,10 @@ public class ManagementSystem {
 						if (movieName.length() < 1) System.out.println("Error: Please enter a non-empty String.");
 					}
 					// Editing has been canceled?
-					if (isCanceled) { break; }
+					if (isCanceled) { 
+						System.out.println("Editing movie has been canceled.");
+						break; 
+					}
 					// Stores new command.
 					String editCommand = "";
 					// Prompt user to enter an editing option until a valid option is entered.
@@ -216,7 +234,10 @@ public class ManagementSystem {
 						}
 					}
 					// Has editing been canceled?
-					if (isCanceled) { break; }
+					if (isCanceled) { 
+						System.out.println("Editing movie has been canceled.");
+						break; 
+					}
 					// If the user chose to edit the movie's description.
 					if (editCommand.equals("description")) {
 						// Prompt the user to enter a movie description until a non-empty string is entered.
@@ -233,7 +254,10 @@ public class ManagementSystem {
 							if (movieDescription.length() < 1) System.out.println("Error: Please enter a non-empty String.");
 						}
 						// Has editing been canceled?
-						if (isCanceled) { break; }
+						if (isCanceled) { 
+							System.out.println("Editing movie has been canceled.");
+							break; 
+						}
 						// Edit the specified movie's description.
 						movieList.editDescription(movieName, movieDescription);
 					}
@@ -252,7 +276,10 @@ public class ManagementSystem {
 							releaseDate = convertDate(input);
 						}
 						// Has editing been canceled? 
-						if (isCanceled) { break; }
+						if (isCanceled) { 
+							System.out.println("Editing movie has been canceled.");
+							break; 
+						}
 						// Edit the specified movie's release date information.
 						movieList.editReleaseDate(movieName, releaseDate);
 					}
@@ -271,7 +298,10 @@ public class ManagementSystem {
 						date = convertDate(input);
 					}
 					// Has operation been canceled?
-					if (isCanceled) { break; }
+					if (isCanceled) { 
+						System.out.println("The start showing operation has been canceled.");
+						break; 
+					}
 					movieList.startShowing(date); 
 					break;
 				case ("count"): // If the user enters the command "COUNT", execute the following.
@@ -288,9 +318,15 @@ public class ManagementSystem {
 						date = convertDate(input);
 					}
 					// Has count operation been canceled?
-					if (isCanceled) { break; }
+					if (isCanceled) { 
+						System.out.println("The count operation has been canceled.");
+						break; 
+					}
 					// Display the count to the user. 
-					System.out.printf("Count of movie's coming before the given date is %d.\n", movieList.countComingMovies(date));
+					System.out.printf("Count of movie's received before the given date is %d.\n", movieList.countReceivedMovies(date));
+					break;
+				case ("cancel"): 
+					System.out.println("No operation currently in-progress to cancel.");
 					break;
 				case ("save"): // If the user enters the command "SAVE", execute the following.
 					saveChanges(movieList);
@@ -298,10 +334,12 @@ public class ManagementSystem {
 				case ("exit"): // If the user enters the command "EXIT", execute the following. 
 					// Setting this to false causes the program to exit the while loop.
 					running = false;
+					// Inform the user the program has ended.
+				    System.out.println("Application has been successfuly exited.");
 					break;
 				default: // The user has failed to enter a valid command..
 					// Notify the user their command is invalid.
-					System.out.println("Error: " + command + " is not a valid command.");
+					System.out.println("Error: \"" + command + "\" is not a valid command.");
 			}
 			
 			// If user has not entered the exit command, prompt user to enter another command.
@@ -335,7 +373,7 @@ public class ManagementSystem {
 				+ "ADD - Add a movie to the coming movies list\n"
 				+ "EDIT - Edit a movies release date or description\n"
 				+ "START SHOWING - Start showing movies on a given date\n"
-				+ "COUNT - Number of coming movies prior to a given date\n"
+				+ "COUNT - Number of received movies prior to a given date\n"
 				+ "CANCEL - Cancels the current operation\n"
 				+ "SAVE - Save all changes\n"
 				+ "EXIT - Exit the program\n");
@@ -356,8 +394,8 @@ public class ManagementSystem {
 		// Create a null Date
 	    Date result = null;
 	    
-	    // Date cannot be expected format if argument length < 10.
-	    if (date.length() < 10) {
+	    // Date cannot be expected format if argument length is not 10 (e.g. 01/02/2022).
+	    if (date.length() != 10) {
 	    	// Notify user input String entered was not in the valid/acceptable format.
 	    	System.out.println("Error: Date entered was invalid.");
 	    	return null;
@@ -371,7 +409,8 @@ public class ManagementSystem {
 	        result  = dateFormat.parse(date);
 	    }
 	    catch(ParseException e){
-	    	// This catch will only ever apply to user input. 
+	    	// This catch will only ever apply to user input unless input file is manually edited and invalid input is added. 
+	    	// Recommendation: Do not manually edit the input file. Use this system instead.
 	    	// Notify user input String entered was not in the valid/acceptable format.
 	        System.out.println("Error: Date entered was invalid.");
 	    }
@@ -387,8 +426,8 @@ public class ManagementSystem {
 	 */
 	static MovieStatus convertStatus(String status) {
 		// Set status depending on argument String, if valid
-		if (status.equals("Coming")) return MovieStatus.Coming;
-		else if (status.equals("Showing")) return MovieStatus.Showing;
+		if (status.equals("Received")) return MovieStatus.RECEIVED;
+		else if (status.equals("Released")) return MovieStatus.RELEASED;
 		// If input String was not valid, notify user and leave status set to null.
 		System.out.println("Error: Invalid status entered");
 		return null;

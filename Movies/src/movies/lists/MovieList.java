@@ -166,7 +166,7 @@ public class MovieList {
 			} 
 		}
 		// Remove all elements to be transfered from the list if any exist. Otherwise notify user that they do not exist. 
-		if (removePos.size() == 0) { System.out.println("No movies with that release date  the status \"Received\"."); }
+		if (removePos.size() == 0) { System.out.println("No movies with that release date have the status \"Received\"."); }
 		while (removePos.size() != 0)  { 
 			// Notify the user which movie's have been changed. 
 			System.out.println(receivedMovies.get(removePos.get(0)).getName() + " started showing successfully.");	

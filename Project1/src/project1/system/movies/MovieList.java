@@ -3,7 +3,6 @@ package project1.system.movies;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.ListIterator;
 
 public class MovieList {
 	
@@ -56,7 +55,7 @@ public class MovieList {
 	 * @return: {true} if the movie was add successfully; {false} otherwise.
 	 */
 	public boolean addToReceivedList(Movie m) {
-		ListIterator<Movie> it = receivedMovies.listIterator(); // Create iterator to iterate over the comingMovies list
+		Iterator<Movie> it = receivedMovies.iterator(); // Create iterator to iterate over the comingMovies list
 		int moviePos = -1; 
 		while (it.hasNext()) { // While there are more elements to iterate over
 			Movie currMovie = (Movie) it.next(); // Move the iterator to the next element and store the element that was passed over

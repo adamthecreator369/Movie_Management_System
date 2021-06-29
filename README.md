@@ -10,10 +10,6 @@ Neha Metlapalli
 <b>System Functionality Overview</b><br>
 Our team developed a system to read in and store data from an input file containing a list of movies and all of their data. A Movie object is created for each individual movie and is then stored into one of two lists, received movies or released movies. When populating the movie lists, the system automatically updates the status of all movies with a release date of today’s date or prior to “released”. The system then prints a simple console interface consisting of a heading and a command key which provides the user with all available commands at their disposal. The operations that the user can perform includes displaying the command key, displaying the movies from both of the movie lists, editing a movie’s release date, editing a movie’s description, changing a movie’s status from “received” to “released”, counting the number of movie’s prior to a given date whose movie status is “received”, canceling the current command in progress, saving all changes made, and exiting the program. The system gracefully handles invalid input from the user and responds with success or error messages after the completion of all operations that are performed.
 
-<b>System Design</b><br>
-<br>
-<b>Input Design</b><br>
-<br>
 <b>File Input</b><br>
 At the start of the program, a one-time operation occurs where the system reads in a source document (.txt file) which contains a list of movies and their data in the following format:
 <br><br>

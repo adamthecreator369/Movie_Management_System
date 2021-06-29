@@ -372,10 +372,10 @@ public class SystemManager {
 		for (int i = 0; i <= interfaceWidth; i++) { System.out.print("-"); }
 		System.out.print("\nKEY - Display the command key\n"
 				+ "DISPLAY - Display all movies\n"
-				+ "ADD - Add a movie to the coming movies list\n"
-				+ "EDIT - Edit a movies release date or description\n"
+				+ "ADD - Add a movie to the received movies list\n"
+				+ "EDIT - Edit a movie's release date or description\n"
 				+ "START SHOWING - Start showing movies on a given date\n"
-				+ "COUNT - Number of received movies prior to a given date\n"
+				+ "COUNT - Number of received movies prior to a date\n"
 				+ "CANCEL - Cancels the current operation\n"
 				+ "SAVE - Save all changes\n"
 				+ "EXIT - Exit the program\n");

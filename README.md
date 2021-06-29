@@ -23,7 +23,20 @@ User Input
 The user input design consists of precise input instructions, which are easy, logical, and easy to follow. The system then evaluates the user input data and depending on whether it’s in the expected format or not, the process either goes to the next step or rejects the input by outputting an error response and then once again requests the required information. If an operation is completed
 successfully using only valid input the user will receive a success message
 signifying that the operation has been completed successfully.
-<br><br><b>Valid User Input</b><br>
+<br><br>
+<b>Accepted Commands</b>
+<br>
+KEY - Display the command key<br>
+DISPLAY - Display all movies<br>
+ADD - Add a movie to the received movies list<br>
+EDIT - Edit a movie's release date or description<br>
+START SHOWING - Start showing movies on a given date<br>
+COUNT - Number of received movies prior to a date<br>
+CANCEL - Cancels the current operation<br>
+SAVE - Save all changes<br>
+EXIT - Exit the program<br>
+
+<b>Valid User Input</b><br>
 • Commands: Can be any combination of capital and non-capital letters of any of the acknowledged commands.
 <br>
 • Movie name: Must be a non-empty string.

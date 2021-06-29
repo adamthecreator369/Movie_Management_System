@@ -4,8 +4,8 @@
 The objective of the movie management system group project was to develop a menu-based Java program that maintains two lists of movies, “received” and “released”, and allows the user to enter commands to perform operations to the lists and the movies contained within those lists.
 
 <b>Our team:</b><br> 
-Adam Jost<br>
-Neha Metlapalli
+• Adam Jost<br>
+• Neha Metlapalli
 
 <b>System Functionality Overview</b><br>
 Our team developed a system to read in and store data from an input file containing a list of movies and all of their data. A Movie object is created for each individual movie and is then stored into one of two lists, received movies or released movies. When populating the movie lists, the system automatically updates the status of all movies with a release date of today’s date or prior to “released”. The system then prints a simple console interface consisting of a heading and a command key which provides the user with all available commands at their disposal. The operations that the user can perform includes displaying the command key, displaying the movies from both of the movie lists, editing a movie’s release date, editing a movie’s description, changing a movie’s status from “received” to “released”, counting the number of movie’s prior to a given date whose movie status is “received”, canceling the current command in progress, saving all changes made, and exiting the program. The system gracefully handles invalid input from the user and responds with success or error messages after the completion of all operations that are performed.

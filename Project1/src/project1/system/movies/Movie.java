@@ -1,3 +1,6 @@
+/* Created by Adam Jost on 06/25/2021 */
+/* Update by Adam Jost on 06/29/2021 */
+
 package project1.system.movies;
 
 import java.text.SimpleDateFormat;
@@ -42,9 +45,7 @@ public class Movie implements ComparableType<Movie> {
 	
 	// Member methods
 	
-	/**
-	 * Checks and updates the MovieStatus to RELEASED if the Movie's release date is today's date or before.
-	 */
+	/** Checks and updates the MovieStatus to RELEASED if the Movie's release date is today's date or before. */
 	public void updateMovieStatus() {
 		
 		Calendar c = Calendar.getInstance();
@@ -66,9 +67,9 @@ public class Movie implements ComparableType<Movie> {
 	public int compareTo(Movie other) { return getReleaseDate().compareTo(other.getReleaseDate()); } 
 	
 	/**
-	 * Formats then returns the Date in desired String format.
+	 * Formats then returns the Date in the desired String format.
 	 * @param date: The Date to be formatted.
-	 * @returns: The formatted date.
+	 * @return: The formatted date.
 	 */
 	private String dateToString(Date date) { 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -77,7 +78,7 @@ public class Movie implements ComparableType<Movie> {
 	
 	/**
 	 * Constructs a String representation of the Movie object for writing to an output file.
-	 * @returns: the String representation of the Movie object.
+	 * @return: the String representation of the Movie object.
 	 */
 	public String toFileString() {
 		return String.format("%s, %s, %s, %s, %s", getName(), dateToString(getReleaseDate()), getDescription(), dateToString(getReceiveDate()), getStatus());
